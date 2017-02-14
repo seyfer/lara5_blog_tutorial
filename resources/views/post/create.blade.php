@@ -9,6 +9,8 @@
 
             {{ csrf_field() }}
 
+            {{--<input type="hidden">--}}
+
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text"

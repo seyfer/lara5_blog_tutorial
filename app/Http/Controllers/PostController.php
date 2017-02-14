@@ -6,6 +6,16 @@ use App\Post;
 
 class PostController extends Controller
 {
+
+
+    /**
+     * PostController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $posts = Post::latest()->get();
@@ -39,9 +49,13 @@ class PostController extends Controller
             'body'  => 'required|min:3',
         ]);
 
-        $post = new Post(request(['title', 'body']));
+//        $post          = new Post(request(['title', 'body']));
+//        $post->user_id = auth()->id();
+//        $post->save();
 
-        $post->save();
+        auth()->user()->publish(
+            new Post(request(['title', 'body']))
+        );
 
         return redirect('/');
     }
