@@ -2,12 +2,15 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Post;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * A basic test example.
      *
@@ -15,6 +18,18 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $this->assertTrue(true);
+//        $this->assertTrue(true);
+
+        //given
+        $first  = factory(Post::class)->create();
+        $second = factory(Post::class)->create([
+                                                   'created_at' => Carbon::now()->subMonth()
+                                               ]);
+
+        //when
+        $posts = Post::archives();
+
+        //then
+        $this->assertCount(2, $posts);
     }
 }
