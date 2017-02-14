@@ -5,7 +5,7 @@
 
         <h1>Publish a post</h1>
 
-        <form action="{{ url('post') }}" method="post">
+        <form action="{{ url('posts') }}" method="post">
 
             {{ csrf_field() }}
 

@@ -13,6 +13,8 @@
 
 
 Route::get('/', 'PostController@index');
-Route::get('/post/create', 'PostController@create');
-Route::get('/post/{post}', 'PostController@show');
-Route::post('/post', 'PostController@store');
+Route::get('/posts/create', 'PostController@create');
+Route::get('/posts/{post}', 'PostController@show');
+Route::post('/posts', 'PostController@store');
+
+Route::post('/posts/{post}/comments', 'CommentsController@store');
