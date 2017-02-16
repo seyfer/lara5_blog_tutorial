@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -16,6 +17,11 @@ class PostController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
+    /**
+     * option here Tag $tag
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
 //        $posts = Post::latest()->get();
@@ -62,6 +68,8 @@ class PostController extends Controller
         auth()->user()->publish(
             new Post(request(['title', 'body']))
         );
+
+        session()->flash('message', 'Post has been published');
 
         return redirect('/');
     }

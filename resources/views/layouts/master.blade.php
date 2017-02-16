@@ -20,14 +20,22 @@
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
           crossorigin="anonymous">
 
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Custom styles for this template -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
-@include('layouts.nav');
+@include('layouts.nav')
+
+@if ($flash = session('message'))
+    <div id="flashMessage" class="alert alert-success" role="alert">
+        {{ $flash }}
+    </div>
+@endif
 
 <div class="blog-header">
     <div class="container">

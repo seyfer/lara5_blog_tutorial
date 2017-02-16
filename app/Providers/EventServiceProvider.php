@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Events\ThreadCreated;
+use App\Listeners\CheckForSpam;
+use App\Listeners\NotifySubscribers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,8 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        ThreadCreated::class => [
+            NotifySubscribers::class,
+            CheckForSpam::class,
         ],
     ];
 
